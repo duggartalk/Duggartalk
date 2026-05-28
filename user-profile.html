@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>DuggarTalk - User Profile</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body{
+      background:#0F172A;
+    }
+
+    ::-webkit-scrollbar{
+      width:5px;
+    }
+
+    ::-webkit-scrollbar-thumb{
+      background:#334155;
+      border-radius:10px;
+    }
+  </style>
+</head>
+
+<body class="text-white min-h-screen">
+
+  <div class="flex items-center justify-between p-4 bg-[#1E293B] sticky top-0 z-50">
+
+    <button onclick="history.back()"
+            class="bg-[#334155] px-4 py-2 rounded-xl">
+      ← Back
+    </button>
+
+    <h1 class="text-xl font-bold text-[#FACC15]">
+      DuggarTalk
+    </h1>
+
+    <button onclick="shareProfile()"
+            class="bg-[#FACC15] text-black px-4 py-2 rounded-xl font-bold">
+      Share
+    </button>
+
+  </div>
+
+
+  <div class="max-w-2xl mx-auto p-4">
+
+    <div class="bg-[#1E293B] rounded-3xl p-5 shadow-lg">
+
+      <div class="flex items-center gap-4">
+
+        <div class="relative">
+            <img id="profileAvatar"
+            src="https://ui-avatars.com/api/?name=User"
+            class="w-24 h-24 rounded-full object-cover border-4 border-[#FACC15]">
+
+            <label id="uploadPhotoLabel" class="absolute bottom-0 right-0 bg-[#FACC15] text-black p-2 rounded-full cursor-pointer hidden">
+                📷
+                <input type="file" id="profilePicInput" accept="image/*" class="hidden">
+            </label>
+        </div>
+
+        <div class="flex-1">
+          <div class="flex items-center gap-2">
+            <h2 id="profileName" class="text-2xl font-bold">Loading...</h2>
+            <span id="verifiedBadge" class="hidden text-blue-400 text-xl">✔</span>
+          </div>
+
+          <p id="profileUsername" class="text-gray-400 mt-1">@username</p>
+          <p id="profileEmail" class="text-gray-500 text-sm mt-1">email@gmail.com</p>
+        </div>
+
+      </div>
+
+      <div class="mt-5 space-y-2 border-t border-gray-700 pt-4">
+        <p class="text-gray-300">
+          <span class="text-[#FACC15] font-bold">📞 Mobile: </span>
+          <span id="profilePhone" class="text-white">No Phone</span>
+        </p>
+        <p class="text-gray-300">
+          <span class="text-[#FACC15] font-bold">📍 Address: </span>
+          <span id="profileAddress" class="text-white">No Address</span>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-3 mt-6">
+        <div class="bg-[#0F172A] rounded-2xl p-4 text-center">
+          <h2 id="totalPosts" class="text-2xl font-bold text-[#FACC15]">0</h2>
+          <p class="text-gray-400 text-sm">Posts</p>
+        </div>
+
+        <div class="bg-[#0F172A] rounded-2xl p-4 text-center">
+          <h2 id="totalLikes" class="text-2xl font-bold text-[#FACC15]">0</h2>
+          <p class="text-gray-400 text-sm">Likes</p>
+        </div>
+
+        <div class="bg-[#0F172A] rounded-2xl p-4 text-center">
+          <h2 id="totalViews" class="text-2xl font-bold text-[#FACC15]">0</h2>
+          <p class="text-gray-400 text-sm">Views</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mt-6">
+        
+      
+<button id="msgBtn" onclick="window.messageUser()" class="flex-1 bg-[#FACC15] text-black py-3 rounded-xl font-bold hover:bg-yellow-400 transition-all flex items-center justify-center gap-2">
+    💬 Message
+</button>
+
+
+
+
+        <button onclick="followUser()" id="followBtn" class="bg-[#334155] py-3 rounded-2xl font-bold">➕ Follow</button>
+      </div>
+
+      <div id="editProfileBtnContainer" class="hidden mt-4">
+    <button id="openEditModalBtn" onclick="window.openEditProfile()" class="w-full bg-[#334155] hover:bg-[#475569] text-[#FACC15] py-3 rounded-2xl font-bold transition">
+        ✏️ Edit Profile
+    </button>
+</div>
+    </div>
+
+    <div class="mt-8">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">User Posts</h2>
+        <span id="postCountText" class="text-gray-400">0 posts</span>
+      </div>
+
+      <div id="userPosts" class="space-y-5">
+        <div class="bg-[#1E293B] rounded-2xl p-4 text-center text-gray-400">
+          Loading posts...
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-[#1E293B] border-t border-gray-700">
+    <div class="grid grid-cols-4 text-center py-3">
+      <button onclick="goHome()">🏠</button>
+      <button onclick="openMessages()">💬</button>
+      <button onclick="openSearch()">🔍</button>
+      <button onclick="goProfile()">👤</button>
+    </div>
+  </div>
+
+  <div id="editProfileModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+      <div class="bg-[#1E293B] p-6 rounded-2xl w-full max-w-sm border border-gray-700 shadow-2xl">
+          
+          <div class="flex justify-between items-center mb-4">
+              <h2 class="text-xl font-bold text-yellow-400">Edit Profile</h2>
+              <button id="closeEditModalBtn" class="text-gray-400 text-2xl hover:text-white">&times;</button>
+          </div>
+
+          <div class="space-y-4">
+              <div>
+                  <label class="block text-xs text-gray-400 mb-1">Full Name</label>
+                  <input type="text" id="editNameInput" placeholder="Full Name" class="w-full p-3 rounded-xl bg-[#0F172A] border border-gray-700 text-white outline-none focus:border-yellow-400">
+              </div>
+
+              <div>
+                  <label class="block text-xs text-gray-400 mb-1">Mobile Number</label>
+                  <input type="tel" id="editPhoneInput" placeholder="Mobile Number" class="w-full p-3 rounded-xl bg-[#0F172A] border border-gray-700 text-white outline-none focus:border-yellow-400">
+              </div>
+
+              <div>
+                  <label class="block text-xs text-gray-400 mb-1">Address</label>
+                  <input type="text" id="editAddressInput" placeholder="Address" class="w-full p-3 rounded-xl bg-[#0F172A] border border-gray-700 text-white outline-none focus:border-yellow-400">
+              </div>
+          </div>
+
+          <div class="flex gap-3 mt-6">
+              <button onclick="document.getElementById('editProfileModal').classList.add('hidden')" class="flex-1 bg-gray-700 text-white py-3 rounded-xl font-bold hover:bg-gray-600 transition-all">Cancel</button>
+              <button id="saveProfileBtn" class="flex-1 bg-yellow-400 text-black py-3 rounded-xl font-bold hover:bg-yellow-300 transition-all">Save Changes</button>
+          </div>
+
+      </div>
+  </div>
+
+
+<script src="settings.js"></script>
+<script type="module" src="app.js"></script>
+<script type="module" src="messages.js"></script>
+<script type="module" src="user-profile.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuggarTalk Settings</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body{
+      background:#0F172A;
+      color:white;
+      font-family:sans-serif;
+    }
+
+    .setting-card{
+      background:#1E293B;
+      border-radius:20px;
+      padding:16px;
+      margin-bottom:15px;
+    }
+
+    .setting-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 0;
+      border-bottom:1px solid #334155;
+    }
+
+    .setting-row:last-child{
+      border:none;
+    }
+
+    .toggle{
+      width:50px;
+      height:26px;
+      border-radius:999px;
+      background:#334155;
+      position:relative;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .toggle.active{
+      background:#22C55E;
+    }
+
+    .toggle-circle{
+      width:22px;
+      height:22px;
+      background:white;
+      border-radius:50%;
+      position:absolute;
+      top:2px;
+      left:2px;
+      transition:.3s;
+    }
+
+    .toggle.active .toggle-circle{
+      left:26px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="p-4 bg-[#1E293B] flex justify-between items-center sticky top-0">
+    <button onclick="history.back()" class="bg-[#334155] px-4 py-2 rounded-xl">
+        ← Back
+    </button>
+
+    <h1 class="text-xl font-bold text-[#FACC15]">
+        Settings
+    </h1>
+
+    <div></div>
+</div>
+
+<div class="max-w-2xl mx-auto p-4">
+
+    <!-- ACCOUNT -->
+    <div class="setting-card">
+
+        <h2 class="text-[#FACC15] font-bold mb-3">
+            Account
+        </h2>
+
+        <div class="setting-row">
+            <span>Private Account</span>
+
+            <div id="privateToggle"
+                 onclick="toggleSetting(this,'privateAccount')"
+                 class="toggle">
+
+                <div class="toggle-circle"></div>
+
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <span>Message Requests</span>
+
+            <div id="messageToggle"
+                 onclick="toggleSetting(this,'messageRequests')"
+                 class="toggle active">
+
+                <div class="toggle-circle"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="setting-card">
+
+        <h2 class="text-[#FACC15] font-bold mb-3">
+            Notifications
+        </h2>
+
+        <div class="setting-row">
+            <span>Push Notifications</span>
+
+            <div id="notificationToggle"
+                 onclick="toggleSetting(this,'notifications')"
+                 class="toggle active">
+
+                <div class="toggle-circle"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- REELS -->
+    <div class="setting-card">
+
+        <h2 class="text-[#FACC15] font-bold mb-3">
+            Reels & Videos
+        </h2>
+
+        <div class="setting-row">
+            <span>Auto Play Reels</span>
+
+            <div id="reelsToggle"
+                 onclick="toggleSetting(this,'autoplayReels')"
+                 class="toggle active">
+
+                <div class="toggle-circle"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- APPEARANCE -->
+    <div class="setting-card">
+
+        <h2 class="text-[#FACC15] font-bold mb-3">
+            Appearance
+        </h2>
+
+        <div class="setting-row">
+            <span>Dark Mode</span>
+
+            <div id="darkToggle"
+                 onclick="toggleDarkMode(this)"
+                 class="toggle active">
+
+                <div class="toggle-circle"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="setting-card">
+
+        <button onclick="clearCache()"
+                class="w-full bg-[#334155] py-3 rounded-xl font-bold mb-3">
+            Clear Cache
+        </button>
+
+        <button onclick="logoutUser()"
+                class="w-full bg-red-500 py-3 rounded-xl font-bold">
+            Logout
+        </button>
+
+    </div>
+
+    <!-- ABOUT -->
+    <div class="text-center text-gray-500 text-sm mt-6">
+        DuggarTalk Pro Max v2.0 🚀
+    </div>
+
+</div>
+
+<script src="settings.js"></script>
+
+</body>
+</html>

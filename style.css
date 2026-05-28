@@ -1,0 +1,187 @@
+﻿
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #0F172A;
+    color: white;
+    padding-bottom: 90px; /* नीचे के बटन के लिए जगह */
+}
+
+.container { 
+    max-width: 600px; 
+    margin: auto; 
+    padding: 10px; 
+}
+
+.hidden { display: none !important; }
+
+/* 2. ऊपर का हेडर */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #1E293B;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* 3. नीचे का नेविगेशन बार */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FACC15;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0;
+    z-index: 999;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+}
+
+/* 4. बीच का नीला प्लस (+) बटन */
+.camera-float {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 65px;
+    height: 65px;
+    background: #2563EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    color: white;
+    border: 4px solid #0F172A;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.2s;
+}
+
+.camera-float:active {
+    transform: translateX(-50%) scale(0.9);
+}
+
+/* 5. इंस्टाग्राम जैसी रील की पट्टी (Shortcut Row) */
+#reelsShortcutRow {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto; /* साइड में स्क्रॉल होगा */
+    flex-wrap: nowrap !important; /* जबरदस्ती एक लाइन में रखेगा */
+    padding: 10px 5px;
+    scrollbar-width: none; 
+    -webkit-overflow-scrolling: touch; /* मोबाइल पर स्मूथ स्क्रॉल के लिए */
+}
+
+/* रील के हर आइटम को सिकुड़ने से रोकने के लिए */
+#reelsShortcutRow > div {
+    flex-shrink: 0; 
+}
+
+
+
+
+
+
+#reelsShortcutRow::-webkit-scrollbar {
+    display: none; /* Chrome/Safari के लिए स्क्रॉल बार छुपाएं */
+}
+
+#reelsShortcutRow video {
+    background: black;
+    pointer-events: none;
+}
+
+/* 6. फुल स्क्रीन रील व्यूअर (असली रील सेक्शन) */
+#reelsFullViewer {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+    z-index: 2000;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory; /* रील अटक कर सेट होगी */
+}
+
+.reel-video-wrapper {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reel-player {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* वीडियो पूरा दिखेगा */
+}
+
+/* रील के ऊपर नाम और कैप्शन */
+.reel-info-overlay {
+    position: absolute;
+    bottom: 110px;
+    left: 20px;
+    z-index: 10;
+    text-shadow: 2px 2px 5px rgba(0,0,0,1);
+    pointer-events: none;
+}
+
+/* 7. कार्ड्स और बटन */
+.card {
+    background-color: #1E293B;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+button {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active {
+    opacity: 0.7;
+}
+
+video, img {
+    border-radius: 12px;
+}
+
+/* Post metadata style */
+.post-time { font-size: 10px; color: #94a3b8; }
+.post-stats { font-size: 12px; color: #cbd5e1; margin-top: 8px; display: flex; gap: 15px; }
+
+
+
+/* रील के बटन्स के लिए */
+.reel-actions {
+    position: absolute;
+    right: 15px;
+    bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 100;
+}
+
+
